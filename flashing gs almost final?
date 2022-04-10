@@ -1,0 +1,19 @@
+let sourceText = "gGgGgGgG";
+let curIndex = 0;
+function setup() {
+  createCanvas(400, 400);
+  frameRate(35);
+}
+function draw() {
+  background(220);
+  fill(255);
+  textSize(350);
+  textAlign(CENTER, CENTER);
+  text(
+    sourceText.substring(curIndex, curIndex+5),
+    width/2, height/2);
+  curIndex++;
+  if (curIndex > sourceText.length) {
+    curIndex = 0;
+  }
+}
