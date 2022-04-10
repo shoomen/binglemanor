@@ -1,0 +1,25 @@
+const letters = `g`
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  background(255);
+  textSize(24);
+  noStroke();
+  textFont("Helvetica");
+}
+
+function draw() {
+  
+  
+  for(let i = 5; i<10; i++){
+    const rand = int(random(0, letters.length100));
+    fill(0);
+    textSize(random(200, 200));
+    text(letters[rand], random(width), random(height));
+    
+
+  }
+  
+  fill(255);
+  ellipse(mouseX, mouseY, windowWidth/4);
+}
