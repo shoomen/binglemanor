@@ -1,0 +1,15 @@
+let sourceText = "G G G G";
+let words = sourceText.split(" ");
+function setup() {
+  createCanvas(400, 400);
+  noLoop();
+}
+function draw() {
+  background(190);
+  textSize(200);
+  textAlign(CENTER, CENTER);
+  for (let i = 0; i < words.length; i++) {
+    fill(random(255));
+    text(words[i], random(width), random(height));
+  }
+}
