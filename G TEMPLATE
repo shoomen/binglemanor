@@ -1,0 +1,10 @@
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  textSize(200)
+  text("G",105,250)
+  textFont("helvetica")
+}
