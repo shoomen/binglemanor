@@ -1,0 +1,24 @@
+function setup() {
+
+  createCanvas(600, 500);
+  background(240);
+
+  const w = width * 0.5;
+  const h = width * 0.3;
+
+  noStroke(1);
+  fill(34);
+  translate((width/2) - (w/2), height/2);
+
+  beginShape();
+  vertex(-85, 5);
+  vertex(9, h/1);
+  vertex(w, h/5);
+  vertex(-30, -20)
+  vertex(19, 20);
+  vertex(w/11, -h/4);
+  vertex(15, -39)
+  endShape();
+
+  noLoop();
+}
