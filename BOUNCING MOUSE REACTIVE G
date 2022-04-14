@@ -1,0 +1,54 @@
+let a;
+
+function setup() {
+  createCanvas(450, 450);
+  a = new Letter(width / 2, height / 2, "GGGGGGGGGGGGGGGG");
+}
+
+function draw() {
+  background(300);
+
+  a.show();
+  a.move();
+  a.intersect(mouseX, mouseY);
+}
+
+
+class Letter {
+  constructor(x, y, letter) {
+    this.x = x;
+    this.y = y;
+    this.letter = letter;
+    this.letterSize = 54;
+    this.angle = 0.0;
+    this.inc = 0.1;
+    this.s = 0
+    this.scl = 10;
+  }
+
+  intersect(x, y) {
+    let distance = dist(this.x, this.y, x, y);
+    if (distance < this.letterSize*2) {
+      
+      if(this.scl<70){
+      this.scl++;
+      }
+
+    } else {
+      if(this.scl>10){
+      this.scl--;
+      }
+    }
+  }
+
+  move() {
+    this.s = sin(this.angle) * this.scl;
+    this.angle += this.inc;
+  }
+
+
+  show() {
+    textSize(this.letterSize);
+    text(this.letter, this.x, this.y + this.s);
+  }
+}
