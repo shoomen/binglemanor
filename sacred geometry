@@ -1,0 +1,44 @@
+let numIterations = 1;
+
+let numBranches = [];
+let r = 100;
+
+function setup() {
+  createCanvas(400, 400);
+  for (let i = 0; i < numIterations; i++) {
+    numBranches[i] = 15;
+  }
+}
+
+function draw() {
+  background(225);
+  translate(width / 2, height / 2);
+  for (let a = 0; a < numIterations; a++) {
+    for (let i = 0; i < numBranches[a]; i++) {
+      push();
+      translate(
+        r * sin((i * 2 * PI) / numBranches[a]),
+        r * cos((i * 2 * PI) / numBranches[a])
+      );
+      for (let e = 0; e < numBranches[0]; e++) {
+        push();
+        translate(
+          r * sin((e * 2 * PI) / numBranches[a]),
+          r * cos((e * 2 * PI) / numBranches[a])
+        );
+        for (let x = 0; x < numBranches[0]; x++) {
+          beginShape();
+          vertex(0, 0);
+          vertex(
+            r * sin((x * 2 * PI) / numBranches[a]),
+            r * cos((x * 2 * PI) / numBranches[a])
+          );
+          endShape();
+        }
+        pop();
+      }
+      pop();
+    }
+  }
+}
+
