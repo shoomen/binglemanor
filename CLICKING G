@@ -1,0 +1,9 @@
+function setup() {
+  createCanvas(windowWidth,windowHeight);
+  
+}
+
+function mousePressed() {
+  let p=createP("g?!");
+  p.position(mouseX,mouseY);
+}
