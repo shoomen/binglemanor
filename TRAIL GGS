@@ -1,0 +1,100 @@
+let b;
+let bars = [];
+let cnv;
+let offsetX = 0;
+let offsetY = 0;
+let font;
+let points = [];
+let yoff = 0;
+let xoff=1;
+
+function preload() {
+  font = loadFont('Avenir Roman.otf');
+}
+
+
+function setup() {
+
+  createCanvas(windowWidth, windowHeight);
+  points = font.textToPoints('GG gg GG gg GG', 25, height / 2, 200, {
+    sampleFactor: 0.2,
+    simplifyThreshold: 0
+  });
+
+  print(points.length);
+  for (let i = 0; i < points.length; i++) {
+    bars[i] = new Bar(points[i].x, points[i].y);
+  }
+  
+}
+
+let num = 0;
+
+function draw() {
+  background(0,5);
+  // let xoff = 0;
+  
+  for (let i = 0; i < bars.length; i+=1) {
+    // let t = map(noise(xoff, yoff), 0, 1, -100, 50);
+    let im = map(i,0,bars.length,1,20);
+    let t = map(sin(xoff+im),-1,1,-5,30);
+    fill(255);
+    // print(t);
+
+    // bars[i].move(t);
+    bars[i].show(t);
+ 
+  }
+      xoff += 0.03;
+
+  // yoff += 0.009;
+}
+
+
+
+
+class Bar {
+  constructor(xpos, ypos) {
+    this.xpos = xpos;
+    this.ypos = ypos;
+    this.xposOG = xpos;
+    this.yposOG = ypos;
+    this.xoff = 0;
+    this.yoff = 0;
+    this.n = 0;
+    this.cycle=0;
+  }
+
+  move(t) {
+    
+    
+    push();
+    translate(this.xpos, this.ypos);
+    noFill();
+    stroke(240,200);
+    
+    line(0,0,t,-t);
+    pop();
+   
+  }
+
+
+  show(t) {  
+    if(this.n<-5){
+      this.n=Math.floor(t);
+    }
+    
+    if (this.n==Math.floor(t)){
+      fill(255);
+      noStroke();
+      ellipse(this.xpos,this.ypos,10);
+    }
+  }
+
+}
+
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
