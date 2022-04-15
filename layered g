@@ -1,0 +1,19 @@
+function setup() {
+  createCanvas(400, 400);
+}
+
+function draw() {
+  background(220);
+  
+  fill(0);
+  textSize(150);
+  textAlign(RIGHT);
+  text("GG",width/2,height/2);
+
+  let c = color("#8C5D61");
+  
+  c.setAlpha(100);
+  fill(c);
+  text("gg",width/3,height/2);
+
+}
