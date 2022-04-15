@@ -1,0 +1,112 @@
+let walker;
+let walkers = [];
+let num = 100;
+let car;
+let cars = [];
+
+function setup() {
+  createCanvas(1280, 720);
+  colorMode(HSB, 111);
+  for (let i = 0; i < num; i++) {
+    walkers[i] = new Walker(width / 2, height / 2);
+  }
+
+  for (let i = 0; i < 5; i++) {
+    cars[i] = new Car();
+  }
+
+}
+
+function draw() {
+  background(0, 20);
+  for (let i = 0; i < cars.length; i++) {
+    cars[i].move();
+    cars[i].show();
+  }
+  for (let i = 0; i < walkers.length; i++) {
+
+    for (let j = 0; j < cars.length; j++) {
+      walkers[i].update(cars[j].xPos, cars[j].yPos);
+    }
+    walkers[i].show();
+  }
+
+}
+
+class Walker {
+  constructor(x, y) {
+    this.pos = createVector(x, y);
+    this.vel = p5.Vector.random2D();
+    this.vel.mult(random(2));
+    this.acc = p5.Vector.random2D();
+
+    this.mag = random(0.001, 0.5);
+    this.d = 10;
+    this.col = random(100);
+    this.ts = random(20, 100);
+
+    this.text = "G";
+  }
+
+
+  update(x, y) {
+    let mouse = createVector(x, y);
+    this.acc = p5.Vector.sub(mouse, this.pos);
+    this.acc.setMag(this.mag);
+
+    this.vel.add(this.acc);
+    this.vel.limit(3);
+    this.pos.add(this.vel);
+
+
+  }
+
+  show() {
+    noStroke();
+    fill(this.col, 100, 100);
+    textSize(this.ts);
+    //ellipse(this.pos.x, this.pos.y, this.d);
+    text(this.text, this.pos.x, this.pos.y);
+  }
+
+
+
+}
+
+
+class Car {
+
+  constructor(x, y) {
+    this.xPos = random(width);
+    this.yPos = random(height);
+    this.d = random(75,100);
+    this.xDirection = 1;
+    this.yDirection = 1;
+    this.xAcc = random(5, 8);
+    this.xAngle = random(0, 70);
+    this.yAcc = random(3, 8);
+    this.yAngle = random(0, 60);
+  }
+  move() {
+    
+    this.xPos = this.xPos + (this.xDirection * this.xAcc * cos(this.xAngle));
+    this.yPos = this.yPos + (this.yDirection * this.yAcc * sin(this.yAngle));
+
+    if (this.xPos > width || this.xPos < 0) {
+      this.xDirection = this.xDirection * -1
+    }
+
+    if (this.yPos > height || this.yPos < 0) {
+      this.yDirection = this.yDirection * -1
+    }
+  }
+
+
+  show() {
+    stroke(15, 100, 100);
+    noFill();
+    strokeWeight(5);
+    ellipse(this.xPos, this.yPos, this.d);
+  }
+
+}
