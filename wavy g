@@ -1,0 +1,92 @@
+let b;
+let bars = [];
+let cnv;
+let offsetX = 0;
+let offsetY = 0;
+let font;
+let points = [];
+let yoff = 0;
+
+function preload() {
+  font = loadFont('Avenir Roman.otf');
+}
+
+
+function setup() {
+
+  createCanvas(windowWidth, windowHeight);
+  angleMode(DEGREES);
+  // colorMode(HSB, 100);
+  points = font.textToPoints('gg', 30, height / 2, 200, {
+    sampleFactor: 0.2,
+    simplifyThreshold: 0
+  });
+
+  print(points.length);
+  for (let i = 0; i < points.length; i++) {
+    bars[i] = new Bar(points[i].x, points[i].y);
+  }
+  print(bars[0]);
+}
+
+
+function draw() {
+  background(0);
+  let xoff = 0;
+  for (let i = 0; i < bars.length; i++) {
+    let t = map(noise(xoff, yoff), 0, 1, 0, 180);
+    // let t = map(sin(xoff),-1,1,0,90);
+    xoff += 0.1;
+
+    bars[i].move(t);
+    bars[i].show();
+  }
+  yoff += 0.03;
+
+}
+
+
+
+
+class Bar {
+  constructor(xpos, ypos) {
+    this.xpos = xpos;
+    this.ypos = ypos;
+    this.xposOG = xpos;
+    this.yposOG = ypos;
+    this.xoff = 0;
+    this.yoff = 0;
+    this.n = 0;
+  }
+
+  move(t) {
+    push();
+    translate(this.xpos, this.ypos);
+    stroke(255,255);
+    rotate(t);
+    // beginShape(POINTS);
+    // for(let i = 0;i<10;i++){
+    //   let n = map(sin(i*10), -1, 1, 0, 10);
+    //   vertex(0,n);
+    // }
+    // endShape();
+      
+    line(0, 0, 0, 10);
+    line(0, 0, 0, -5);
+    pop();
+  }
+
+
+  show() {
+    fill(255);
+    
+  }
+
+}
+
+
+
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
