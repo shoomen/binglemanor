@@ -1,0 +1,19 @@
+
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+}
+
+
+function mousePressed() {
+  let p = createP("gg!");
+  p.position(random(0, windowWidth), random(0, windowHeight));
+
+}
+
+function draw() {
+  background(220);
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+}
