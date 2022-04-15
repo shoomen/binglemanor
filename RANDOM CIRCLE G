@@ -1,0 +1,26 @@
+function setup() {
+  createCanvas(500, 500);
+  background(0);
+  noLoop();
+}
+
+function draw() {
+  background("WHITE");
+
+  let xPos = width / 2;
+  let yPos = height / 2;
+
+  for (let mover = 0; mover < 10; mover = mover + 1) {
+    stroke("MAROON");
+    let sw = mover/10;
+    strokeWeight(sw);
+    noFill();
+    ellipse(xPos, yPos, 200+(mover*10), 200+(mover*10));
+    print("mover:" + mover);
+    
+    fill(0);
+    text("G",random(width),random(height));
+  }
+  
+  print("BINGLE");
+}
